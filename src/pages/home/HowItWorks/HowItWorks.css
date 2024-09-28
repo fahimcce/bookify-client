@@ -1,0 +1,21 @@
+.how-it-works {
+  padding: 50px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.step-card {
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-5px);
+}
+
+.step-icon {
+  font-size: 40px;
+  color: #1890ff;
+  margin-bottom: 10px;
+}

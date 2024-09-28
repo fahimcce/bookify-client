@@ -1,0 +1,34 @@
+.footer {
+  background-color: #001529;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  position: bottom;
+}
+
+.footer .ant-typography {
+  color: white; /* Ensures text color is white */
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px; /* Space between icons */
+}
+
+.social-icons a {
+  display: flex;
+  justify-content: center; /* Center align the icons */
+  gap: 15px; /* Space between icons */
+  color: white;
+  font-size: 24px; /* Icon size */
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #1890ff; /* Change color on hover */
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}

@@ -1,0 +1,86 @@
+/* Make the navbar fixed at the top */
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  background-color: #001529;
+}
+
+/* To ensure content below the navbar doesn't hide under it */
+.ant-layout {
+  padding-top: 64px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+.logo {
+  flex-grow: 1;
+}
+
+/* Styles for the logo */
+.logo img {
+  height: 20px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Desktop Menu */
+.menu-desktop {
+  flex: 2;
+  display: none;
+  justify-content: flex-end;
+  overflow: visible;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.menu-mobile {
+  display: flex;
+}
+
+/* Ant Design default for larger screens */
+@media (min-width: 768px) {
+  .menu-desktop {
+    display: flex;
+  }
+
+  .menu-mobile {
+    display: none;
+  }
+}
+
+/* Custom styles for the menu */
+.custom-menu .ant-menu-item {
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  background: none;
+  text-overflow: unset;
+  white-space: nowrap;
+}
+
+.custom-menu .ant-menu-item:hover {
+  border-bottom: 2px solid white;
+  background: none !important;
+}
+
+.custom-menu .ant-menu-item-selected {
+  border-bottom: 2px solid white;
+  background: none !important;
+}
+
+.custom-menu {
+  flex-grow: 0;
+  justify-content: flex-end;
+  display: flex;
+  max-width: none;
+  width: 100%;
+}

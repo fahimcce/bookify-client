@@ -1,0 +1,27 @@
+.why-choose-us {
+  padding: 50px;
+  background-color: #f0f2f5;
+  text-align: center;
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  color: #001529;
+  margin-bottom: 30px;
+}
+
+.feature-card {
+  border-radius: 10px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 40px;
+  color: #1890ff;
+  margin-bottom: 10px;
+}

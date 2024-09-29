@@ -3,10 +3,12 @@ import App from "../App";
 import About from "../pages/about/About";
 import Home from "../pages/home/Home";
 import Contact from "../pages/contact/Contact";
-import MeetingRoom from "../pages/meetingRoom/MeetingRoom";
+
 import Login from "../pages/login/Login";
 import Register from "../pages/login/Register";
 import ProtectedRoute from "../components/layouts/ProtectedRoute";
+import MeetingRooms from "../pages/meetingRoom/MeetingRooms";
+import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/meeting-room",
-        element: <MeetingRoom />,
+        element: <MeetingRooms />,
       },
       {
         path: "/login",
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/admin/dashboard",
+        element: (
+          <ProtectedRoute>
+            <AdminDashboard />
+          </ProtectedRoute>
+        ),
       },
     ],
   },

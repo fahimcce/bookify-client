@@ -4,10 +4,9 @@ import { verifyToken } from "../../utils/verifyToken";
 import { setUser } from "../../redux/features/auth/authSlice";
 import { useAppDispatch } from "../../redux/hook";
 import { useLoginMutation } from "../../redux/features/auth/authApi";
-import Swal from "sweetalert2"; // Import SweetAlert2
-import "./Login.css"; // Optional: Add your styles here
+import Swal from "sweetalert2";
+import "./Login.css";
 import { useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify";
 
 const Login = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +15,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    // const toastId = toast.loading("Logging in");
     const userInfo = {
       email: data.email,
       password: data.password,
@@ -24,17 +22,16 @@ const Login = () => {
 
     try {
       const res = await login(userInfo).unwrap();
-      // console.log("API Response:", res);
+      const { token } = res;
 
-      if (res?.token) {
-        const user = verifyToken(res.token);
-        // console.log(user);
+      if (token) {
+        localStorage.setItem("token", token); // Store the token
+        console.log("Token stored in localStorage:", token);
 
-        dispatch(setUser({ user: user, token: res.token }));
-        // toast.success("logged In", { id: toastId, duration: 2000 });
-        navigate("/");
+        const user = verifyToken(token); // Decode token here
+        dispatch(setUser({ user, token })); // Dispatch user information
+        navigate("/"); // Navigate after login success
 
-        // Show success message using SweetAlert2
         Swal.fire({
           position: "top-end",
           icon: "success",

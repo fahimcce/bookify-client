@@ -35,7 +35,7 @@ const Navbar = () => {
   const userMenuItems = (
     <Menu>
       <Menu.Item key="my-bookings">
-        <NavLink to="/my-bookings">My Bookings</NavLink>
+        <NavLink to="/">My Bookings</NavLink>
       </Menu.Item>
       <Menu.Item key="logout" onClick={handleLogout}>
         <span style={{ color: "red" }}>Logout</span>
@@ -47,7 +47,7 @@ const Navbar = () => {
   const adminMenuItems = (
     <Menu>
       <Menu.Item key="dashboard">
-        <NavLink to="/dashboard">Dashboard</NavLink>
+        <NavLink to="/admin/dashboard">Dashboard</NavLink>
       </Menu.Item>
       <Menu.Item key="logout" onClick={handleLogout}>
         <span style={{ color: "red" }}>Logout</span>

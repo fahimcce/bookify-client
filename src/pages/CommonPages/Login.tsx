@@ -13,9 +13,10 @@ import { useLogInMutation } from "../../redux/features/auth/auth.api";
 import { toast } from "sonner";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUser } from "../../redux/features/auth/authSlice";
-import { verifiyToken } from "../../utils/VerifyToken";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { logiValidationSchema } from "../../schemaValidation/LoginRegistrationValidation";
+import { verifiyToken } from "../../utils/VerifyToken";
 
 const { Title } = Typography;
 

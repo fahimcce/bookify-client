@@ -6,8 +6,10 @@ import { useAppSelector } from "../redux/hooks";
 import { adminDashDashboarditmes } from "../lib/adminDashboardpath";
 import { ItemType, MenuItemType } from "antd/es/menu/interface";
 import { navbarGenerator } from "../utils/navbarGenerator";
-import { verifiyToken } from "../utils/VerifyToken";
+
 import NoDataFound from "../components/common/NoDataFound";
+import { verifiyToken } from "../utils/VerifyToken";
+
 const { Content, Sider } = Layout;
 
 const DashBoard: React.FC = () => {

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { verifiyToken } from "../../utils/VerifyToken";
+
 type MenuItem = Required<MenuProps>["items"][number];
 
 const Navbar = () => {

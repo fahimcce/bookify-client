@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+.overlay{
+   background: linear-gradient(to left, #030015ba 40%, #00000057 60%);
+}
+
+
+.ant-upload-wrapper {
+    flex-direction: column;
+}
+.ant-upload-list-picture{
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    width: 100%;
+    flex-wrap: wrap;
+}
+.ant-upload-list-item-name{
+    display: none;
+}
+
+.contact .ant-form-item-label label {
+    color:white !important;
+}
+.featuredRooms{
+    position: relative;
+}
+.featuredRooms::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 70px;
+    transform: skewX(-35deg);
+    background: #000;
+    bottom: 0;
+    z-index: -1;
+}
+
+@media (max-width: 500px) {
+    .overlay{
+        background:#000000b1;
+     }
+}

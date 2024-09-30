@@ -1,21 +1,22 @@
-import CustomerTestimonials from "./CustomerTestimonials/CustomerTestimonials";
-import FeaturedRooms from "./featuredRooms/FeaturedRooms";
-import HeroSection from "./heroSection/HeroSection";
-import HowItWorks from "./HowItWorks/HowItWorks";
-import ServiceSection from "./serviceSection/ServiceSection";
-import WhyChooseUs from "./WhyChooseUs/WhyChooseUs";
+
+import ServiceAdvertisement from "./AdvertismentSection"
+import Faq from "./Faq"
+import FeaturedRooms from "./FeaturedRooms"
+import HeroSection from "./HeroSection"
+import TestimonialSlider from "./Testimonial"
+import WhyChooseUs from "./WhyChooseUs"
 
 const Home = () => {
-  return (
-    <div>
-      <HeroSection />
-      <ServiceSection></ServiceSection>
-      <FeaturedRooms />
-      <WhyChooseUs />
-      <HowItWorks />
-      <CustomerTestimonials />
-    </div>
-  );
-};
+    return (
+        <>
+            <HeroSection />
+            <ServiceAdvertisement />
+            <FeaturedRooms />
+            <TestimonialSlider />
+            <WhyChooseUs />
+            <Faq />
+        </>
+    )
+}
 
-export default Home;
+export default Home

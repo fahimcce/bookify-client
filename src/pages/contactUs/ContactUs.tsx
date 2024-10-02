@@ -14,7 +14,6 @@ const ContactUs: React.FC = () => {
       <div
         className="py-24 flex items-center justify-center"
         style={{
-          background: "url(contact.jpg)",
           backgroundAttachment: "fixed",
           backgroundSize: "cover",
           backgroundPosition: "center",

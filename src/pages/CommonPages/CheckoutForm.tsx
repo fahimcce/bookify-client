@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { Button, Card } from "antd";
+import { Button, Card, Typography } from "antd";
 import { toast } from "sonner";
 import { useAddBookingMutation } from "../../redux/api/roomManagement/booking.api";
 import { useState } from "react";
@@ -49,7 +49,7 @@ const CheckoutForm = ({
     } else {
       // Send response to the server for payment confirmation
       const response = await fetch(
-        "https://room-booking-server2.vercel.app/api/confirm-payment",
+        "http://localhost:5000/api/confirm-payment",
         {
           method: "POST",
           headers: {
@@ -93,15 +93,21 @@ const CheckoutForm = ({
 
   return (
     <>
-      <Card className="p-6 text-center bg-gray-200 rounded-lg shadow-md">
-        <form onSubmit={handleSubmit}>
-          <CardElement className="mb-4" />
+      <Card className="p-6 text-center bg-white shadow-lg rounded-lg">
+        <Typography.Title level={4} className="mb-4">
+          Complete Your Payment
+        </Typography.Title>
+        <Typography.Paragraph>
+          You are about to book {totalSlots} slot(s) for a total of ${total}.
+        </Typography.Paragraph>
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <CardElement className="mb-4 p-2 border rounded-md bg-gray-100" />
           <Button
             type="primary"
             size="large"
             htmlType="submit"
             disabled={!stripe}
-            className="w-full mt-4"
+            className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition duration-200 ease-in-out"
           >
             Pay Now and Confirm Booking
           </Button>

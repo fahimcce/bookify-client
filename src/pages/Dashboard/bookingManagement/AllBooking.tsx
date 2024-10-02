@@ -23,17 +23,17 @@ const AllBooking = () => {
     {
       title: "No",
       dataIndex: "no",
-      render: (no: number) => <p className="font-bold text-purple-600">{no}</p>,
+      render: (no: number) => <p className="font-bold text-blue-700">{no}</p>,
     },
     {
-      title: "Customer Name",
+      title: "Client Name",
       dataIndex: ["user", "name"],
       render: (name: string) => (
-        <p className="font-semibold text-gray-800">{name}</p>
+        <p className="font-semibold text-gray-900">{name}</p>
       ),
     },
     {
-      title: "Room Details",
+      title: "Room Information",
       dataIndex: "room",
       render: (room: any) => {
         return room?.map(
@@ -42,7 +42,7 @@ const AllBooking = () => {
             idx: number
           ) => {
             return (
-              <p key={idx} className="font-semibold text-gray-800">
+              <p key={idx} className="font-semibold text-gray-900">
                 {item?._id?.name}
               </p>
             );
@@ -51,12 +51,12 @@ const AllBooking = () => {
       },
     },
     {
-      title: "Booking Date",
+      title: "Date of Booking",
       dataIndex: "room",
       render: (room: any) => {
         return room?.map((item: any, idx: number) => {
           return (
-            <p key={idx} className="font-semibold text-gray-800">
+            <p key={idx} className="font-semibold text-gray-900">
               {moment(item?.date).format("DD-MMM-YYYY")}
             </p>
           );
@@ -64,24 +64,23 @@ const AllBooking = () => {
       },
     },
     {
-      title: "Time Slots",
+      title: "Scheduled Time",
       dataIndex: "room",
       render: (room: any) => {
         return room?.map((item: any) => {
           const slots = item?.slots;
           return slots?.map((slot: any, idx: number) => {
             return (
-              <p
-                key={idx}
-                className="text-gray-700"
-              >{`${slot?.startTime} - ${slot?.endTime}`}</p>
+              <p key={idx} className="text-gray-800">
+                {`${slot?.startTime} - ${slot?.endTime}`}
+              </p>
             );
           });
         });
       },
     },
     {
-      title: "Booking Status",
+      title: "Current Status",
       dataIndex: "isConfirmed",
       render: (isConfirmed: string) => (
         <Tag
@@ -93,7 +92,7 @@ const AllBooking = () => {
               : "red"
           }
         >
-          {isConfirmed}
+          {isConfirmed.charAt(0).toUpperCase() + isConfirmed.slice(1)}
         </Tag>
       ),
     },
@@ -104,7 +103,7 @@ const AllBooking = () => {
           <div className="flex gap-2 items-center">
             <Button
               disabled={allData?.isConfirmed === "canceled"}
-              className="bg-blue-500 text-white"
+              className="bg-teal-600 text-white hover:bg-teal-700 transition duration-300"
               onClick={() => handleConfirm(allData?._id, allData?.isConfirmed)}
             >
               {allData?.isConfirmed === "canceled"
@@ -122,12 +121,12 @@ const AllBooking = () => {
                     : "canceled"
                 )
               }
-              className="bg-red-500 text-white"
+              className="bg-red-600 text-white hover:bg-red-700 transition duration-300"
             >
               {allData?.isConfirmed === "canceled" ? "Reapprove" : "Cancel"}
             </Button>
             <Button className="px-2" onClick={() => handleDelete(allData?._id)}>
-              <FaTrash className="text-red-600" />
+              <FaTrash className="text-red-600 hover:text-red-700 transition duration-300" />
             </Button>
           </div>
         );
@@ -142,7 +141,7 @@ const AllBooking = () => {
         : status === "confirmed"
         ? "unconfirmed"
         : "canceled";
-    const toastId = toast.loading("Updating booking...");
+    const toastId = toast.loading("Updating your booking...");
     const res = (await confirmBooking({
       id,
       status: newStatus,
@@ -158,8 +157,8 @@ const AllBooking = () => {
 
   const handleDelete = (id: string) => {
     Swal.fire({
-      title: "Confirm Deletion",
-      text: "This action cannot be undone.",
+      title: "Delete Confirmation",
+      text: "This action is irreversible.",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d9534f",
@@ -167,14 +166,14 @@ const AllBooking = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        const toastId = toast.loading("Deleting booking...");
+        const toastId = toast.loading("Removing booking...");
         const res = (await deleteBooking(id)) as TResponse<any>;
         if (res.data) {
           toast.success(res.data.message, { id: toastId });
         } else if (res.error) {
           toast.error(res.error?.data?.message, { id: toastId });
         } else {
-          toast.error("An error occurred.", { id: toastId });
+          toast.error("An unexpected error occurred.", { id: toastId });
         }
       }
     });
@@ -185,7 +184,15 @@ const AllBooking = () => {
       <Table
         dataSource={bookingData}
         columns={Tablecolumn}
-        className="bg-gray-50 rounded-lg"
+        className="bg-white rounded-lg shadow-lg"
+        pagination={{
+          pageSize: 10,
+          showSizeChanger: true,
+          pageSizeOptions: ["5", "10", "20"],
+        }}
+        rowClassName={(_record, index) =>
+          index % 2 === 0 ? "bg-gray-50" : "bg-white"
+        }
       />
     </>
   );

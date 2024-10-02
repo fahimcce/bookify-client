@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut } from "../../redux/features/auth/authSlice";
 import { toast } from "sonner";
 import { verifiyToken } from "../../utils/VerifyToken";
+import "./MenuStyles.css";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -62,6 +63,7 @@ const Navbar = () => {
       ),
     },
   ];
+
   const handleLogout = () => {
     const toastId = toast.loading("Logging out...");
     dispatch(logOut());
@@ -70,7 +72,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="shadow-lg sticky top-0 bg-gray-800 bg-opacity-80 backdrop-blur z-50 py-2">
+    <nav className="shadow-lg sticky top-0 bg-[#00152a] z-50 py-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
@@ -88,7 +90,7 @@ const Navbar = () => {
                 fontSize: "18px",
               }}
               items={items}
-              className="font-poppins font-medium bg-transparent"
+              className="font-poppins font-medium bg-transparent text-white menu-items-white "
             />
             {/* user icon and dropdown based on user */}
             {user && (
@@ -98,7 +100,7 @@ const Navbar = () => {
                 arrow={true}
                 overlayStyle={{ border: "1px solid #bbb", borderRadius: "8px" }}
               >
-                <Button className="px-6 font-semibold text-white">
+                <Button className="px-6 font-semibold">
                   Profile <FaUser size={15} />
                 </Button>
               </Dropdown>
@@ -115,29 +117,22 @@ const Navbar = () => {
         </div>
       </div>
       <Drawer
-        title="Navigation Menu"
+        title="Menu"
         placement="right"
         onClose={closeDrawer}
         open={visible}
-        headerStyle={{ backgroundColor: "#444", color: "white" }}
-        bodyStyle={{ backgroundColor: "#333", color: "white" }}
       >
-        <Menu
-          mode="inline"
-          onClick={closeDrawer}
-          items={items}
-          style={{ backgroundColor: "#333", color: "white" }}
-        />
+        <Menu mode="inline" onClick={closeDrawer} items={items} />
         {user && (
           <Dropdown
             className="ml-7"
             trigger={["click"]}
             menu={{ items: UserdropDownItems }}
             arrow={true}
-            overlayStyle={{ border: "1px solid #bbb", borderRadius: "8px" }}
+            overlayStyle={{ border: "1px solid #ccc", borderRadius: "8px" }}
           >
-            <Button className="px-6 font-semibold text-white">
-              Profile <FaUser size={15} />
+            <Button className="px-6 font-semibold">
+              User <FaUser size={15} />
             </Button>
           </Dropdown>
         )}

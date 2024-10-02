@@ -107,6 +107,7 @@ const AddaRoomModal = ({
         title={isUpdate ? "Update Room" : "Add New Room"}
         open={isModalOpen}
         onCancel={handleCancel}
+        footer={null} // Hides the default OK and Cancel buttons
       >
         <Col span={24}>
           <RoomForm
@@ -168,12 +169,16 @@ const AddaRoomModal = ({
                 label="Room Images"
               />
             )}
-            <Button
-              htmlType="submit"
-              className="bg-green-600 hover:bg-green-700 text-white md:px-6 mb-4"
-            >
-              {isUpdate ? "Update Room" : "Add Room"}
-            </Button>
+
+            {/* Center the Add Room button */}
+            <div className="flex justify-center mt-6">
+              <Button
+                htmlType="submit"
+                className="bg-green-600 hover:bg-green-700 text-white px-8 py-2"
+              >
+                {isUpdate ? "Update Room" : "Add Room"}
+              </Button>
+            </div>
           </RoomForm>
         </Col>
       </Modal>

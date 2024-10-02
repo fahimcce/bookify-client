@@ -8,7 +8,7 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
-const RoomifyFooter = () => {
+const BookifyFooter = () => {
   const thisYear = new Date().getFullYear();
 
   return (
@@ -21,15 +21,15 @@ const RoomifyFooter = () => {
             <ul className="space-y-2">
               <li className="flex items-center">
                 <FaEnvelope className="mr-2" />
-                <span>contact@roomify.com</span>
+                <span>contact@bookify.com</span>
               </li>
               <li className="flex items-center">
                 <FaPhoneAlt className="mr-2" />
-                <span>+880-123-456-7890</span>
+                <span>+880345678</span>
               </li>
               <li className="flex items-center">
                 <FaMapMarkerAlt className="mr-2" />
-                <span>456 Office Rd, Dhaka, Bangladesh</span>
+                <span>Zakir Hossain Road, GEC,Chittagong, Bangladesh</span>
               </li>
             </ul>
           </div>
@@ -90,11 +90,11 @@ const RoomifyFooter = () => {
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-6 text-center">
-          © {thisYear} Roomify. All Rights Reserved.
+          © {thisYear} Bookify. All Rights Reserved.
         </div>
       </div>
     </footer>
   );
 };
 
-export default RoomifyFooter;
+export default BookifyFooter;

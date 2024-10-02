@@ -53,7 +53,6 @@ const authApi = baseApi.injectEndpoints({
     }),
     updateStatus: builder.mutation({
       query: (id: string) => {
-        console.log(id);
         return {
           url: `/auth/status/${id}`,
           method: "PUT",
@@ -73,5 +72,11 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUserQuery, useLogInMutation, useRegisterMutation, useUpdateStatusMutation, useDeleteUserMutation, useGetOneUserQuery } =
-  authApi;
+export const {
+  useGetAllUserQuery,
+  useLogInMutation,
+  useRegisterMutation,
+  useUpdateStatusMutation,
+  useDeleteUserMutation,
+  useGetOneUserQuery,
+} = authApi;

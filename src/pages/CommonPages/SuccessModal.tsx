@@ -53,24 +53,31 @@ const SuccessModal = ({
         onCancel={handleCancel}
         className="success-modal"
         centered
+        footer={null} // No default footer, we will create our own buttons
       >
-        <div className="flex items-center justify-center">
+        <div className="relative flex flex-col items-center justify-center">
           <Confetti
-            style={{ maxWidth: "100%", height: "50%" }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
             numberOfPieces={300}
             opacity={0.9}
           />
           <Card
-            className="p-6 text-center bg-gradient-to-br from-blue-400 to-blue-600 text-white"
+            className="relative z-10 p-6 text-center bg-gradient-to-br from-indigo-500 to-purple-600 text-white shadow-lg rounded-lg"
             style={{ maxWidth: "700px", width: "100%" }}
           >
             <CheckCircleOutlined className="text-6xl mb-4" />
-            <h1 className="text-2xl font-bold mb-4">
+            <h1 className="text-3xl font-extrabold mb-4">
               Your Booking is Successful!
             </h1>
             <p className="text-md mb-8">
-              We appreciate your choice in using Roomify. Your reservation has
-              been confirmed successfully.
+              Thank you for choosing Bookify! Your reservation has been
+              confirmed.
             </p>
             <div className="flex flex-col items-start pb-4 gap-2">
               <p className="font-semibold">
@@ -91,13 +98,17 @@ const SuccessModal = ({
               <Button
                 type="primary"
                 size="large"
-                className="w-full"
+                className="w-full rounded-md shadow-md hover:shadow-lg transition duration-200 ease-in-out"
                 onClick={handleViewBookings}
               >
                 My Bookings
               </Button>
-              <Button size="large" className="w-full bg-gray-200 text-gray-800">
-                <span onClick={handleGoHome}>Return to Homepage</span>
+              <Button
+                size="large"
+                className="w-full bg-gray-200 text-gray-800 rounded-md shadow-md hover:shadow-lg transition duration-200 ease-in-out"
+                onClick={handleGoHome}
+              >
+                Return to Homepage
               </Button>
             </div>
           </Card>

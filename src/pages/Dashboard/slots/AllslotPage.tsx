@@ -26,90 +26,105 @@ const AllslotPage = () => {
     };
   });
 
+  // Function for slot deletion with updated confirmation prompt
   const handleDelete = (id: string) => {
     Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "Confirm Deletion?",
+      text: "This action is irreversible. Proceed?",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonColor: "#007BFF", // Changed confirm button color
+      cancelButtonColor: "#FF5733", // Changed cancel button color
+      confirmButtonText: "Delete Slot",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await deleteSlot(id);
         if (res.data.success) {
-          toast.success(res.data.message);
+          toast.success(res.data.message || "Slot removed successfully!");
         } else {
-          toast.error("Something went wrong");
+          toast.error("Failed to delete. Please try again.");
         }
       }
     });
   };
 
+  // Define the columns for the table
   const columns: TableColumnsType<DataType> = [
     {
-      title: "No",
+      title: "S/N",
       dataIndex: "no",
       render: (text: string) => (
-        <a
-          className="md:font-semibold text-xs sm:text-base"
-          style={{ lineHeight: "1" }}
+        <span
+          className="font-medium text-sm"
+          style={{ lineHeight: "1.2", color: "#4A4A4A" }} // Modified text color and size
         >
           {text}
-        </a>
+        </span>
       ),
     },
     {
-      title: "Room Name",
+      title: "Room Title",
       dataIndex: ["room", "name"],
       render: (text: string) => (
-        <a
-          className="md:font-semibold text-xs sm:text-base"
-          style={{ lineHeight: "1" }}
+        <span
+          className="font-medium text-sm"
+          style={{ lineHeight: "1.2", color: "#009688" }} // Changed text color to teal
         >
           {text}
-        </a>
+        </span>
       ),
     },
     {
-      title: "Room No",
+      title: "Room Number",
       dataIndex: ["room", "roomNo"],
+      render: (roomNo: string) => (
+        <span className="text-gray-700">{roomNo}</span> // Text for room number
+      ),
     },
     {
-      title: "Date",
+      title: "Date Reserved",
       dataIndex: "date",
-      render: (date) => <p>{moment(date).format("MMM Do YY")}</p>,
+      render: (date) => (
+        <span>{moment(date).format("MMMM Do, YYYY")}</span> // Full month, day, and year format
+      ),
     },
     {
-      title: "Start Time",
+      title: "Starts At",
       dataIndex: "startTime",
+      render: (time) => (
+        <span className="text-indigo-600">{time}</span> // Changed text color for time
+      ),
     },
     {
-      title: "End Time",
+      title: "Ends At",
       dataIndex: "endTime",
+      render: (time) => (
+        <span className="text-red-600">{time}</span> // Changed text color for end time
+      ),
     },
     {
-      title: "Status",
+      title: "Current Status",
       dataIndex: "isBooked",
       render: (isBooked: boolean) => {
         return (
-          <Tag color={`${isBooked ? "yellow" : "blue"}`}>
-            {!isBooked ? "Available" : "Booked"}
+          <Tag color={`${isBooked ? "orange" : "green"}`}>
+            {" "}
+            {/* Updated colors */}
+            {!isBooked ? "Open" : "Reserved"}
           </Tag>
         );
       },
     },
     {
-      title: "Action",
+      title: "Operations",
       render: (transformSlot) => {
         return (
           <div className="flex gap-3">
             <Button
               onClick={() => handleDelete(transformSlot._id)}
-              className="w-fit p-1 h-auto border-0 text-red-600"
+              className="w-fit p-1 h-auto border-0 text-[#DC3545]" // Custom red color for delete button
             >
-              <TbTrash size={20} />
+              <TbTrash size={18} />
             </Button>
             <UpdateslotModal slotData={transformSlot} />
           </div>
@@ -118,20 +133,24 @@ const AllslotPage = () => {
     },
   ];
 
+  // Show loading indicator while data is being fetched
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <>
       {transformSlot?.length ? (
-        <div>
+        <div className="p-4 bg-[#F7F9FB]">
+          {" "}
+          {/* Light background color */}
           <Table
             scroll={{ x: 800 }}
-            // onChange={onChange}
             sticky={true}
             loading={isFetching}
             columns={columns}
             dataSource={transformSlot}
+            className="shadow-lg" // Added box-shadow for the table
           />
         </div>
       ) : (

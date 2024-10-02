@@ -16,40 +16,44 @@ const Bookings = () => {
 
   const Tablecolumn = [
     {
-      title: "S/N",
+      title: "No.",
       dataIndex: "no",
-      render: (no: number) => <p className="font-medium text-gray-700">{no}</p>,
+      render: (no: number) => <p className="font-medium text-blue-800">{no}</p>,
     },
     {
-      title: "Room Title",
+      title: "Room Name",
       dataIndex: "room",
       render: (room: any) =>
         room?.map((item: { _id: { name: string } }, idx: number) => (
-          <p key={idx} className="font-medium text-gray-800">
+          <p key={idx} className="font-medium text-gray-900">
             {item?._id?.name}
           </p>
         )),
     },
     {
-      title: "Room Image",
+      title: "Room Picture",
       dataIndex: "room",
       render: (room: any) =>
         room?.map((item: { _id: { roomImg: any } }, idx: number) => (
-          <Image key={idx} className="max-w-16" src={item?._id?.roomImg[0]} />
+          <Image
+            key={idx}
+            className="max-w-16 rounded-lg shadow-sm"
+            src={item?._id?.roomImg[0]}
+          />
         )),
     },
     {
-      title: "Booking Date",
+      title: "Date of Booking",
       dataIndex: "room",
       render: (room: any) =>
         room?.map((item: any, idx: number) => (
-          <p key={idx} className="font-medium text-gray-600">
-            {moment(item?.date).format("DD-MMM-YYYY")}
+          <p key={idx} className="font-medium text-gray-700">
+            {moment(item?.date).format("MMMM D, YYYY")}
           </p>
         )),
     },
     {
-      title: "Time Slots",
+      title: "Scheduled Times",
       dataIndex: "room",
       render: (room: any) =>
         room?.map((item: any) => {
@@ -58,13 +62,13 @@ const Bookings = () => {
           return slots?.map((slot: any, idx: number) => (
             <p
               key={idx}
-              className="text-gray-600"
+              className="text-gray-700"
             >{`${slot?.startTime} - ${slot?.endTime}`}</p>
           ));
         }),
     },
     {
-      title: "Booking Status",
+      title: "Status",
       dataIndex: "isConfirmed",
       render: (isConfirmed: string) => (
         <Tag
@@ -76,7 +80,7 @@ const Bookings = () => {
               : "red"
           }
         >
-          {isConfirmed}
+          {isConfirmed.charAt(0).toUpperCase() + isConfirmed.slice(1)}
         </Tag>
       ),
     },
@@ -87,13 +91,24 @@ const Bookings = () => {
   }
 
   return (
-    <Section className="py-8 bg-gray-50 rounded-lg shadow-md">
-      <h1 className="mb-5 text-xl font-bold text-gray-800">Your Bookings</h1>
+    <Section className="py-8 bg-white rounded-lg shadow-lg">
+      <h1 className="mb-5 text-2xl font-semibold text-gray-900">
+        Your Reservations
+      </h1>
       {bookingData?.length ? (
         <Table
           loading={isFetching}
           dataSource={bookingData}
           columns={Tablecolumn}
+          className="rounded-lg overflow-hidden"
+          pagination={{
+            pageSize: 5,
+            showSizeChanger: true,
+            pageSizeOptions: ["5", "10", "20"],
+          }}
+          rowClassName={(_record, index) =>
+            index % 2 === 0 ? "bg-gray-50" : "bg-white"
+          }
         />
       ) : (
         <NoDataFound />

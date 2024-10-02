@@ -16,28 +16,28 @@ const OurStory: React.FC = () => {
             <h2 className="text-5xl font-extrabold mb-5">Our Narrative</h2>
             <div className="space-y-5 text-lg leading-relaxed">
               <p>
-                Founded on the principle that the right environment fosters
-                creativity, Roomify began its journey to reshape how
-                organizations manage their meeting spaces. Established in 2020,
-                we identified the complexities involved in booking and utilizing
-                meeting areas effectively. Since then, we’ve transformed into a
-                dynamic platform designed to meet the evolving needs of modern
-                workplaces.
+                Established on the belief that an inspiring environment nurtures
+                innovation, Bookify embarked on its mission to revolutionize the
+                management of meeting spaces. Founded in 2020, we recognized the
+                challenges organizations face in efficiently booking and
+                utilizing these areas. Since then, we have evolved into a
+                versatile platform designed to address the ever-changing needs
+                of today’s workplaces.
               </p>
               <p>
-                Our mission revolves around creating a user-friendly experience
-                that emphasizes adaptability and reliability. We understand that
-                each organization has its unique challenges, and we offer
-                tailored solutions to ensure that every meeting space is
-                optimized for success.
+                Our mission is centered around providing a seamless user
+                experience that prioritizes flexibility and trustworthiness. We
+                acknowledge that every organization encounters distinct
+                obstacles, and we deliver customized solutions to ensure that
+                every meeting space is optimized for success.
               </p>
               <p>
-                As we continue to expand, our focus remains on delivering
-                exceptional service and innovative solutions. We envision a
-                future where every meeting is seamless, empowering teams to
-                collaborate without limitations. Join us as we redefine the
-                standards for meeting spaces and enhance how the world connects
-                and collaborates.
+                As we continue to grow, our commitment remains steadfast in
+                delivering outstanding service and innovative solutions. We
+                envision a future where every meeting is effortless, empowering
+                teams to collaborate freely. Join us in redefining the standards
+                for meeting spaces and enhancing the way the world connects and
+                collaborates.
               </p>
             </div>
           </div>

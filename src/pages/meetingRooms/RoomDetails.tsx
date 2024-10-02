@@ -1,109 +1,134 @@
-
-import { Carousel, Tag } from 'antd'; // Ant Design's Carousel component
-import { FaCheckCircle } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
-import Loading from '../../components/common/Loading';
-import Section from '../../components/common/Section';
-import moment from 'moment';
-import BookingModal from './BookingModal';
-import { useGetAroomsQuery } from '../../redux/api/roomManagement/room.api';
-import { useGetAllSlotsQuery } from '../../redux/api/roomManagement/slot.api';
-import NoDataFound from '../../components/common/NoDataFound';
-
-
-// interface RoomDetailsProps {
-//     name: string;
-//     roomNo: number;
-//     floorNo: number;
-//     capacity: number;
-//     pricePerSlot: number;
-//     amenities: string[];
-//     roomImg: string[];
-// }
+import { Carousel, Tag } from "antd"; // Ant Design's Carousel component
+import { FaCheckCircle } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import Loading from "../../components/common/Loading";
+import Section from "../../components/common/Section";
+import moment from "moment";
+import BookingModal from "./BookingModal";
+import { useGetAroomsQuery } from "../../redux/api/roomManagement/room.api";
+import { useGetAllSlotsQuery } from "../../redux/api/roomManagement/slot.api";
+import NoDataFound from "../../components/common/NoDataFound";
 
 const RoomDetails = () => {
-    const params = useParams()
-    const { data, isLoading, isFetching } = useGetAroomsQuery(params?.id)
-    const room = data?.data;
-    // getting slots
+  const params = useParams();
+  const { data, isLoading, isFetching } = useGetAroomsQuery(params?.id);
+  const room = data?.data;
 
-    const { data: slots } = useGetAllSlotsQuery({ roomId: params?.id })
-    const availableSlots = slots?.data;
+  // Getting slots
+  const { data: slots } = useGetAllSlotsQuery({ roomId: params?.id });
+  const availableSlots = slots?.data;
 
-    if (isLoading || isFetching) {
-        return <Loading />
-    }
-    return (
-        <Section className='pb-10'>
-            {
-                Object.values(room).length ?
-                    <div className="container mx-auto p-4">
-                        <h1 className='my-6 font-roboto text-2xl font-semibold'>Room Details</h1>
-                        <div className="bg-white shadow-lg rounded-lg">
-                            {/* Image Carousel */}
-                            <div className="w-full">
-                                <Carousel autoplay arrows={true}>
-                                    {room?.roomImg.map((imgUrl: string, index: number) => (
-                                        <div key={index}>
-                                            <img
-                                                src={imgUrl}
-                                                alt={`Room Image ${index + 1}`}
-                                                className="w-full mx-auto rounded-md max-h-[450px] object-cover"
-                                            />
-                                        </div>
-                                    ))}
-                                </Carousel>
-                            </div>
+  if (isLoading || isFetching) {
+    return <Loading />;
+  }
 
-                            {/* Room Information */}
-                            <div className="p-3 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-                                <div className='flex flex-col gap-4'>
-                                    <h1 className="text-4xl font-bold text-gray-800 mb-4">Name: {room?.name}</h1>
-                                    <p className="text-gray-600 mb-2"> <Tag className='text-base font-semibold md:text-lg' color='blue'>Room No: {room?.roomNo}</Tag> | <Tag className='text-base font-semibold md:text-lg' color='blue'> Floor: {room?.floorNo}</Tag></p>
-                                    <p className="text-gray-600 mb-2"><Tag className='text-base font-semibold md:text-lg' color='blue'>Capacity: {room?.capacity} people</Tag></p>
-                                    <p className="text-2xl font-semibold text-gray-800 mb-6">Price Per Slot: ${room?.pricePerSlot}</p>
-                                </div>
-                                {/* Amenities */}
-                                <div className="mb-8">
-                                    <h2 className="text-2xl font-semibold text-gray-800 mb-4">Amenities</h2>
-                                    <ul className="gap-4">
-                                        {room?.amenities.map((amenity: string, index: number) => (
-                                            <li key={index} className="flex items-center">
-                                                <FaCheckCircle className="text-blue-500 mr-2" />
-                                                <span className="text-gray-600">{amenity}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 className="text-2xl font-semibold text-gray-800 mb-4">Available Slots</h4>
-                                    <div className='max-h-[150px] overflow-y-auto'>
-                                        {
-                                            availableSlots?.length > 0 ?
-                                                availableSlots?.map((items: { startTime: string, endTime: string, date: string }, idx: number) => (
-                                                    <div className='flex gap-3' key={idx}>
-                                                        <div className='felx gap-2'>
-                                                            <Tag>{items?.startTime}</Tag>-<Tag> {items?.endTime}</Tag>
-                                                        </div>
-                                                        <h2><p>{moment(items?.date).format("MMM Do YY")}</p></h2>
-                                                    </div>
-                                                )) :
-                                                <h4 className="text-base md:text-xl font-semibold text-gray-800 mb-4">Not Available Slots</h4>
-                                        }
-                                    </div>
-                                </div>
+  return (
+    <Section className="pb-10 bg-gradient-to-b from-gray-100 to-white">
+      {Object.values(room).length ? (
+        <div className="container mx-auto p-4">
+          <h1 className="my-6 font-sans text-3xl font-bold text-blue-600">
+            Room Overview
+          </h1>
+          <div className="bg-white shadow-lg rounded-lg border border-gray-300 grid grid-cols-1 md:grid-cols-2">
+            {/* Image Carousel */}
+            <div className="w-full">
+              <Carousel autoplay arrows={true} effect="fade">
+                {room?.roomImg.map((imgUrl: string, index: number) => (
+                  <div key={index}>
+                    <img
+                      src={imgUrl}
+                      alt={`Room Image ${index + 1}`}
+                      className="w-full mx-auto rounded-lg max-h-[450px] object-cover"
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
 
-                            </div>
+            {/* Room Information and Amenities */}
+            <div className="p-6 md:p-10 flex flex-col justify-between">
+              <div>
+                <h1 className="text-3xl font-extrabold text-gray-800 mb-2">
+                  Room Name: {room?.name}
+                </h1>
+                <div className="flex items-center mb-2">
+                  <Tag className="text-base font-medium text-white bg-blue-500">
+                    Room No: {room?.roomNo}
+                  </Tag>
+                  <Tag className="text-base font-medium text-white bg-blue-500 ml-2">
+                    Floor: {room?.floorNo}
+                  </Tag>
+                </div>
+                <Tag className="text-base font-medium text-white bg-blue-500 mb-2">
+                  Capacity: {room?.capacity} persons
+                </Tag>
+                <p className="text-2xl font-bold text-gray-900 mb-4">
+                  Cost Per Slot:{" "}
+                  <span className="text-green-600">${room?.pricePerSlot}</span>
+                </p>
+              </div>
 
-                            <div className="flex justify-center pb-8 px-4">
-                                <BookingModal room={room} />
-                            </div>
+              {/* Amenities */}
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                  Facilities
+                </h2>
+                <ul className="gap-4">
+                  {room?.amenities.map((amenity: string, index: number) => (
+                    <li key={index} className="flex items-center">
+                      <FaCheckCircle className="text-blue-600 mr-2" />
+                      <span className="text-gray-700">{amenity}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Available Slots */}
+              <div>
+                <h4 className="text-2xl font-bold text-gray-800 mb-4">
+                  Free Time Slots
+                </h4>
+                <div className="max-h-[150px] overflow-y-auto">
+                  {availableSlots?.length > 0 ? (
+                    availableSlots?.map(
+                      (
+                        item: {
+                          startTime: string;
+                          endTime: string;
+                          date: string;
+                        },
+                        idx: number
+                      ) => (
+                        <div className="flex gap-4 my-1" key={idx}>
+                          <div className="flex gap-2">
+                            <Tag color="blue">{item?.startTime}</Tag>-
+                            <Tag color="blue">{item?.endTime}</Tag>
+                          </div>
+                          <h2 className="text-gray-600">
+                            {moment(item?.date).format("MMM Do YY")}
+                          </h2>
                         </div>
-                    </div> :
-                    <NoDataFound />
-            }
-        </Section>
-    );
+                      )
+                    )
+                  ) : (
+                    <h4 className="text-lg font-semibold text-red-500 mb-4">
+                      No Available Slots
+                    </h4>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-center pb-8 px-4">
+            <BookingModal room={room} />
+          </div>
+        </div>
+      ) : (
+        <NoDataFound />
+      )}
+    </Section>
+  );
 };
 
 export default RoomDetails;

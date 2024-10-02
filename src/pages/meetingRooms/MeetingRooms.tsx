@@ -26,7 +26,7 @@ const MeetingRooms = () => {
   });
   const rooms = data?.data?.result;
   const meta = data?.data?.meta;
-  console.log(meta);
+  // console.log(meta);
   if (isLoading) {
     return <Loading />;
   }
@@ -94,11 +94,6 @@ const MeetingRooms = () => {
     setSort(undefined);
     setPages(1);
   };
-
-  // const onChange: PaginationProps["onChange"] = (page) => {
-  //     console.log(page)
-  //     setPages(page)
-  // }
 
   return (
     <>

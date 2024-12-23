@@ -1,30 +1,77 @@
-# React + TypeScript + Vite
+# **Meeting Room Booking System**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## **Overview**
 
-Currently, two official plugins are available:
+The Meeting Room Booking System is a web-based application designed to simplify the process of reserving meeting rooms in an organization. Users can view available rooms, book slots, and manage their reservations effortlessly. The application ensures a smooth, streamlined experience for administrators and employees alike, helping businesses better manage their resources.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## **Live URL**
+- **Live view:**: [bookify Client](https://bookify-peach.vercel.app/)
+- **server Live view:**: [bookify Backend](https://assignment3-seven-xi.vercel.app/)
+---
+## **Features**
+- **User Management:**
+  - Role-based access control (Admin and User roles)
+  - Soft deletion of users
+  - Admin can manage users and assign roles
+- **Room Management:**
+  - Add, update, and delete meeting rooms
+  - Set room amenities (e.g., projector, whiteboard, video conferencing)
+- **Slot Booking:**
+  - Real-time booking of available slots
+  - Price per slot feature based on room capacity
+  - Booking history and status updates
+- **Advanced Features:**
+  - Dynamic search and filtering of rooms
+  - Capacity-based pricing model
+  - Detailed room and booking information
+  - Error handling with clear error messages and logging
+--
+## **Tech Stack**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend:**
+  - TypeScript
+  - React
+  - Redux
+  - Tailwind CSS
+- **Backend:**
+  - Node.js
+  - Express.js
+  - Mongoose (MongoDB as the database)
 
-- Configure the top-level `parserOptions` property like this:
+- **Other Technologies:**
+  - JSON Web Tokens (JWT) for authentication
+  - bcrypt for password hashing
+  - Zod for schema validation
+  - HTTP-status for consistent status codes
+  - using Stripe for payment gateway
+---
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## **Setup and Installation**
+### **Prerequisites*
+Before setting up the application, ensure you have the following installed:
+- Node.js (v14+)
+- MongoDB
+- Git
+### **Steps to Install and Run Locally**
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/fahimcce/bookify-client.git
+   cd bookify-client
+   ```
+2. **set env file name .env like this**:
+    ```bash
+      VITE_Cloud_Name=your cloudinary cloud name
+      VITE_Api_Key= your cloudinary API key
+      VITE_Api_Secret= your cloudinary API secret
+      VITE_UpLoad_preset=your cloudinary upload preset
+      VITE_AccessToken_Secret=your jwt access token secret
+      VITE_Publishable_Key= your stripe publishable key
+    ```
+3. **others instructions**:
+   ```bash
+      npm install
+      npm run dev
+   ```

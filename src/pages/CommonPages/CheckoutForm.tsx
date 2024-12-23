@@ -49,7 +49,7 @@ const CheckoutForm = ({
     } else {
       // Send response to the server for payment confirmation
       const response = await fetch(
-        "http://localhost:5000/api/confirm-payment",
+        "https://assignment3-seven-xi.vercel.app/api/confirm-payment",
         {
           method: "POST",
           headers: {

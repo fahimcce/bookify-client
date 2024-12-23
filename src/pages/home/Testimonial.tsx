@@ -5,39 +5,43 @@ import Section from "../../components/common/Section";
 
 const testimonials = [
   {
-    name: "Alice Walker",
-    title: "CEO, Orion Technologies",
-    image: "https://i.postimg.cc/vHrWqFvH/jhon-dow.jpg",
+    name: "Abu Bakar Galib",
+    title: "Founder & CEO, Stellar Ventures",
+    image:
+      "https://i.ibb.co.com/pjbfy4j/Whats-App-Image-2024-10-02-at-10-26-19-PM-1.jpg",
     feedback:
-      "Our team has greatly benefited from Roomify's intuitive platform. Scheduling rooms is no longer a headache, and the seamless process has allowed us to focus more on productive meetings.",
+      "Our business has greatly improved with the ease of Bookify's platform. Booking rooms has become effortless, enabling us to focus on growing our company.",
   },
   {
-    name: "David Wright",
-    title: "Operations Head, Zenith Corp",
-    image: "https://i.postimg.cc/dVJGgHWR/man.jpg",
+    name: "Saydol Islam",
+    title: "Operations Manager, Apex Dynamics",
+    image:
+      "https://i.ibb.co.com/wJfN91Z/Whats-App-Image-2024-10-02-at-10-26-19-PM.jpg",
     feedback:
-      "Roomify has made organizing meetings incredibly simple. The ability to monitor room availability in real time has streamlined our internal operations, resulting in better efficiency.",
+      "Bookify has simplified our entire meeting process. The ability to check room availability instantly has led to smoother coordination and improved operational efficiency.",
   },
   {
-    name: "Sophia Turner",
-    title: "CTO, Horizon Innovations",
-    image: "https://i.ibb.co/745fRGT/emily.png",
+    name: "Ershad Eslahi",
+    title: "Chief Technology Officer, Infinity Innovations",
+    image:
+      "https://i.ibb.co.com/7RvdLPP/Whats-App-Image-2024-10-02-at-10-26-18-PM.jpg",
     feedback:
-      "With Roomify, managing our office spaces has never been easier. The platform’s analytics are especially helpful for understanding room usage, ensuring optimal resource allocation.",
+      "Managing office spaces with Bookify is a breeze. Its data-driven insights have helped us make better decisions about space utilization and resource management.",
   },
   {
-    name: "Chloe Adams",
-    title: "HR Director, Delta Solutions",
-    image: "https://i.postimg.cc/x1gLQv7w/girl.jpg",
+    name: "Fahim Uddin",
+    title: "HR Manager, Synergy Solutions",
+    image:
+      "https://i.ibb.co.com/jHDHRK3/Whats-App-Image-2024-10-02-at-10-26-18-PM-1.jpg",
     feedback:
-      "Roomify helps us organize interviews and employee training sessions with minimal effort. The reminders and smooth interface make it easy to keep everything on track.",
+      "Bookify has been essential in organizing our recruitment drives and training programs. The notifications and seamless user experience help us stay organized and efficient.",
   },
   {
-    name: "Benjamin Lee",
-    title: "COO, Nexus Enterprises",
-    image: "https://i.postimg.cc/dVJGgHWR/man.jpg",
+    name: "Forhadul Islam Fahim",
+    title: "Chief Operating Officer, Quantum Industries",
+    image: "https://i.ibb.co.com/gvspQ9D/c-1.jpg",
     feedback:
-      "We've found Roomify to be an invaluable tool for managing multiple office spaces. Its flexible, user-friendly features have boosted our team’s productivity across the board.",
+      "Bookify has been a fantastic solution for managing our office spaces across different locations. Its customizable features and ease of use have significantly increased our team’s productivity.",
   },
 ];
 

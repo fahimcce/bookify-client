@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "../../components/common/Loading";
 import { Input, Form, Select, SelectProps, Button, Pagination } from "antd";
 import { FaBars } from "react-icons/fa";
@@ -14,76 +14,86 @@ const MeetingRooms = () => {
   const [range, setRange] = useState(undefined);
   const [capacity, setCapacity] = useState(undefined);
   const [sort, setSort] = useState(undefined);
-  // const [searchParams, setSearchParams] = useState<[] | undefined>(undefined)
-  const srcDebounce = useDebounce(search, 1000);
   const [pages, setPages] = useState(1);
-  const { data, isLoading } = useGetAllRoomsQuery({
-    search: srcDebounce,
-    range,
-    capacity,
-    sort,
-    page: `${pages}`,
-  });
-  const rooms = data?.data?.result;
+
+  const { data, isLoading } = useGetAllRoomsQuery({}); // Fetch all rooms initially
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const rooms = data?.data?.result || [];
   const meta = data?.data?.meta;
-  // console.log(meta);
+
+  const srcDebounce = useDebounce(search, 1000);
+
+  const [filteredRooms, setFilteredRooms] = useState<any[]>(rooms); // Filtered rooms
+
+  useEffect(() => {
+    let filtered = rooms;
+
+    // Apply search filter
+    if (srcDebounce) {
+      filtered = filtered.filter(
+        (room: any) =>
+          room.name.toLowerCase().includes(srcDebounce.toLowerCase()) ||
+          room.amenities.some((amenity: string) =>
+            amenity.toLowerCase().includes(srcDebounce.toLowerCase())
+          )
+      );
+    }
+
+    // Apply capacity filter
+    if (capacity) {
+      const [minCapacity, maxCapacity] =
+        (capacity as string)?.split("-").map(Number) || [];
+
+      filtered = filtered.filter(
+        (room: any) =>
+          room.capacity >= minCapacity &&
+          (maxCapacity ? room.capacity <= maxCapacity : true)
+      );
+    }
+
+    // Apply price range filter
+    if (range) {
+      const [minPrice, maxPrice] =
+        (range as string)?.split("-").map(Number) || [];
+
+      filtered = filtered.filter(
+        (room: any) =>
+          room.pricePerSlot >= minPrice &&
+          (maxPrice ? room.pricePerSlot <= maxPrice : true)
+      );
+    }
+
+    // Apply sorting
+    if (sort) {
+      filtered.sort((a: any, b: any) =>
+        sort === "pricePerSlot"
+          ? a.pricePerSlot - b.pricePerSlot
+          : b.pricePerSlot - a.pricePerSlot
+      );
+    }
+
+    setFilteredRooms(filtered); // Set the filtered rooms
+  }, [srcDebounce, capacity, range, sort, rooms]);
+
   if (isLoading) {
     return <Loading />;
   }
+
   const capaCityOptions: SelectProps["options"] = [
-    {
-      value: `0-4`,
-      label: `0-4`,
-    },
-    {
-      value: `4-8`,
-      label: `4-8`,
-    },
-    {
-      value: `8-12`,
-      label: `8-12`,
-    },
-    {
-      value: `12-16`,
-      label: `12-16`,
-    },
-    {
-      value: `16-20`,
-      label: `16-20`,
-    },
-    {
-      value: `20+`,
-      label: `20+`,
-    },
+    { value: `0-4`, label: `0-4` },
+    { value: `4-8`, label: `4-8` },
+    { value: `8-12`, label: `8-12` },
+    { value: `12-16`, label: `12-16` },
+    { value: `16-20`, label: `16-20` },
+    { value: `20+`, label: `20+` },
   ];
 
-  let maxValue = 0;
-  rooms?.forEach((item: any) => {
-    if (maxValue < item?.pricePerSlot) {
-      maxValue = item.pricePerSlot;
-    }
-  });
   const priceFilter: SelectProps["options"] = [
-    {
-      value: `0-5000`,
-      label: `0-5000`,
-    },
-    {
-      value: `5000-10000`,
-      label: `5000-10000`,
-    },
-    {
-      value: `10000-20000`,
-      label: `10000-20000`,
-    },
-    {
-      value: `20000-30000`,
-      label: `20000-30000`,
-    },
-    {
-      value: `30000+`,
-      label: `30000+`,
-    },
+    { value: `0-100`, label: `0-100` },
+    { value: `101-200`, label: `101-200` },
+    { value: `201-300`, label: `201-300` },
+    { value: `301-400`, label: `301-400` },
+    { value: `400+`, label: `400+` },
   ];
 
   // handle reset
@@ -97,128 +107,116 @@ const MeetingRooms = () => {
 
   return (
     <>
-      {
-        <section className="px-4 sm:px-10 md:px-20">
+      <section className="px-4 sm:px-10 md:px-20">
+        <div
+          className={`text-end mt-2 fixed z-50 bg-transparent backdrop:blur-sm top-12 ${
+            sideOpen ? "left-0" : ""
+          }`}
+        >
+          <Button onClick={() => setSideOpen(!sideOpen)}>
+            <FaBars />
+          </Button>
+        </div>
+        <div className="gap-8 relative min-h-screen">
           <div
-            className={`text-end mt-2 fixed z-50 bg-transparent backdrop:blur-sm top-12 ${
-              sideOpen ? "left-0" : ""
-            }`}
+            className={`bg-white md:w-[20%] absolute h-full duration-300 z-30 ${
+              sideOpen ? "-left-full" : ""
+            } border p-3`}
           >
-            <Button className="" onClick={() => setSideOpen(!sideOpen)}>
-              <FaBars />
-            </Button>
-          </div>
-          <div className="gap-8 relative min-h-screen ">
-            <div
-              className={`bg-white md:w-[20%] absolute h-full duration-300 z-30 ${
-                sideOpen ? "-left-full" : null
-              } border p-3`}
-            >
-              <div className="py-1 grid grid-cols-1 md:gap-4 mt-10">
-                <Form.Item
-                  label="Search"
-                  layout="vertical"
-                  className="font-bold"
-                >
-                  <Input
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search Room Name & amenities"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Capacity"
-                  layout="vertical"
-                  className="font-bold"
-                >
-                  <Select
-                    options={capaCityOptions}
-                    value={capacity}
-                    placeholder="Filter by capacity"
-                    onChange={(value) => {
-                      setCapacity(value);
-                    }}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Price Range"
-                  layout="vertical"
-                  className="font-bold"
-                >
-                  <Select
-                    value={range}
-                    onChange={(value) => setRange(value)}
-                    options={priceFilter}
-                    placeholder="Filter by Price Range"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Sort by Price"
-                  layout="vertical"
-                  className="font-bold"
-                >
-                  <Select
-                    value={sort}
-                    onChange={(value) => setSort(value)}
-                    options={[
-                      { value: "pricePerSlot", label: "Low To High" },
-                      { value: "-pricePerSlot", label: "High to Low" },
-                    ]}
-                    placeholder="Sort by price"
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Reset"
-                  layout="vertical"
-                  className="font-bold"
-                >
-                  <Button onClick={handleReset}>Reset All</Button>
-                </Form.Item>
-              </div>
+            <div className="py-1 grid grid-cols-1 md:gap-4 mt-10">
+              <Form.Item label="Search" layout="vertical" className="font-bold">
+                <Input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search Room Name & amenities"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Capacity"
+                layout="vertical"
+                className="font-bold"
+              >
+                <Select
+                  options={capaCityOptions}
+                  value={capacity}
+                  placeholder="Filter by capacity"
+                  onChange={(value) => setCapacity(value)}
+                />
+              </Form.Item>
+              <Form.Item
+                label="Price Range"
+                layout="vertical"
+                className="font-bold"
+              >
+                <Select
+                  value={range}
+                  onChange={(value) => setRange(value)}
+                  options={priceFilter}
+                  placeholder="Filter by Price Range"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Sort by Price"
+                layout="vertical"
+                className="font-bold"
+              >
+                <Select
+                  value={sort}
+                  onChange={(value) => setSort(value)}
+                  options={[
+                    { value: "pricePerSlot", label: "Low To High" },
+                    { value: "-pricePerSlot", label: "High to Low" },
+                  ]}
+                  placeholder="Sort by price"
+                />
+              </Form.Item>
+              <Form.Item label="Reset" layout="vertical" className="font-bold">
+                <Button onClick={handleReset}>Reset All</Button>
+              </Form.Item>
             </div>
-            {rooms?.length ? (
+          </div>
+          {filteredRooms?.length ? (
+            <div
+              className={`absolute overflow-y-scroll h-full right-0 top-0 w-full border duration-300 p-4 bg-slate-50 ${
+                sideOpen ? "w-[100%]" : "md:w-[80%]"
+              }`}
+            >
               <div
-                className={`absolute overflow-y-scroll h-full right-0 top-0 w-full border duration-300 p-4 bg-slate-50 ${
-                  sideOpen ? "w-[100%]" : "md:w-[80%]"
+                className={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-7 ${
+                  sideOpen ? "xl:grid-cols-4" : "xl:grid-cols-3"
                 }`}
               >
-                <div
-                  className={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-7 ${
-                    sideOpen ? "xl:grid-cols-4" : "xl:grid-cols-3"
-                  }`}
-                >
-                  {rooms?.map((item: any, idx: number) => (
-                    <div key={idx}>
-                      <RoomCard
-                        pageName="meetingRoom"
-                        _id={item._id}
-                        name={item.name}
-                        amenities={item.amenities}
-                        capacity={item.capacity}
-                        floorNo={item.floorNo}
-                        pricePerSlot={item.pricePerSlot}
-                        roomImg={item.roomImg}
-                        roomNo={item.roomNo}
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="py-6">
-                  <Pagination
-                    size="small"
-                    pageSize={pages}
-                    total={meta?.totalPage}
-                    showSizeChanger
-                    onChange={(page) => setPages(page)}
-                  />
-                </div>
+                {filteredRooms.map((item: any, idx: number) => (
+                  <div key={idx}>
+                    <RoomCard
+                      pageName="meetingRoom"
+                      _id={item._id}
+                      name={item.name}
+                      amenities={item.amenities}
+                      capacity={item.capacity}
+                      floorNo={item.floorNo}
+                      pricePerSlot={item.pricePerSlot}
+                      roomImg={item.roomImg}
+                      roomNo={item.roomNo}
+                    />
+                  </div>
+                ))}
               </div>
-            ) : (
-              <NoDataFound />
-            )}
-          </div>
-        </section>
-      }
+              <div className="py-6">
+                <Pagination
+                  size="small"
+                  pageSize={pages}
+                  total={meta?.totalPage}
+                  showSizeChanger
+                  onChange={(page) => setPages(page)}
+                />
+              </div>
+            </div>
+          ) : (
+            <NoDataFound />
+          )}
+        </div>
+      </section>
     </>
   );
 };

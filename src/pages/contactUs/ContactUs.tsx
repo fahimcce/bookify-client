@@ -10,7 +10,7 @@ import {
 
 const ContactUs: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-400 to-indigo-600">
+    <div className="min-h-screen mb-2">
       <div
         className="py-24 flex items-center justify-center"
         style={{
@@ -24,9 +24,9 @@ const ContactUs: React.FC = () => {
           <ContactForm />
         </div>
       </div>
-      <div className="container mx-auto bg-gray-900 bg-opacity-90 mt-16 py-12 rounded-lg shadow-lg">
+      <div className="container mx-auto bg-gray-900 bg-opacity-90 mt-16 py-12 shadow-lg">
         <div className="mt-5 p-4 text-center">
-          <h2 className="text-2xl lg:text-4xl font-extrabold mb-6 text-white">
+          <h2 className="text-2xl lg:text-4xl font-semibold mb-6 text-white">
             Stay Connected with Us
           </h2>
           <div className="flex justify-center space-x-8 mt-8">

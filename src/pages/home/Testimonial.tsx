@@ -71,25 +71,23 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <Section className="py-24 bg-gradient-to-r from-purple-50 to-indigo-100">
-      <h2 className="text-4xl md:text-5xl text-center font-bold mb-16 text-purple-800">
+    <Section className="py-24">
+      <h2 className="text-4xl text-left font-bold mb-16 border-b-4 border-green-500 pb-4">
         What Our Customers Are Saying
       </h2>
       <Slider {...settings}>
         {testimonials.map((testimonial, index) => (
           <div key={index} className="px-5 py-12">
-            <div className="bg-indigo-50 p-10 rounded-xl shadow-lg text-center transition-all transform hover:scale-105">
+            <div className=" p-10 rounded-xl shadow-lg text-center transition-all transform hover:scale-105">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}
-                className="w-24 h-24 rounded-full mx-auto mb-8 border-4 border-indigo-200"
+                className="w-24 h-24 rounded-full mx-auto mb-8 border-4"
               />
-              <h3 className="text-2xl font-semibold mb-3 text-purple-900">
+              <h3 className="text-2xl font-semibold mb-3">
                 {testimonial.name}
               </h3>
-              <p className="text-lg text-purple-600 mb-4">
-                {testimonial.title}
-              </p>
+              <p className="text-lg mb-4">{testimonial.title}</p>
               <p className="text-gray-700 leading-relaxed line-clamp-5">
                 {testimonial.feedback}
               </p>

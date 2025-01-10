@@ -40,7 +40,7 @@ const Registration = () => {
   };
 
   return (
-    <div className="py-10 min-h-screen flex items-center justify-center bg-gradient-to-br from-green-300 to-blue-500 bg-opacity-30">
+    <div className="py-10 min-h-screen flex items-center justify-center ">
       <motion.div
         className="p-10 bg-gray-50 shadow-md rounded-lg w-full max-w-lg"
         initial={{ opacity: 0, y: -50 }}
@@ -101,7 +101,7 @@ const Registration = () => {
             type="primary"
             htmlType="submit"
             block
-            className="bg-teal-600 hover:bg-teal-700 transition duration-200"
+            className="bg-gray-800 hover:bg-teal-700 transition duration-200"
           >
             Sign Up
           </Button>
@@ -109,7 +109,7 @@ const Registration = () => {
 
         <div className="mt-7 flex-wrap flex sm:gap-6">
           <p>Already have an account?</p>
-          <Link to="/login" className="text-teal-500 font-semibold">
+          <Link to="/login" className="text-gray-700 font-semibold">
             Login Here
           </Link>
         </div>

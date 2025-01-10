@@ -51,7 +51,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-400 to-green-600 bg-opacity-30">
+    <div className="min-h-screen flex items-center justify-center  bg-opacity-30">
       <motion.div
         className="p-10 bg-gray-100 shadow-md rounded-xl w-full max-w-lg"
         initial={{ opacity: 0, y: -50 }}
@@ -89,17 +89,19 @@ const Login = () => {
               )}
             </span>
           </div>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="mt-6 bg-green-600 hover:bg-green-700"
-          >
-            Log In
-          </Button>
+          <div className="text-center px-4">
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="mt-6 px-12 bg-gray-800 hover:bg-green-700"
+            >
+              Login
+            </Button>
+          </div>
         </RoomForm>
         <div className="mt-7 flex-wrap flex sm:gap-6">
           <p>Don't have an account yet?</p>
-          <Link to="/register" className="text-green-600 font-semibold">
+          <Link to="/register" className="text-gray-800 font-semibold">
             Create an Account
           </Link>
         </div>

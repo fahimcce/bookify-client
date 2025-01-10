@@ -8,13 +8,13 @@ const ContactForm: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
-      className="p-10 bg-gradient-to-r from-purple-500 to-indigo-600 text-white shadow-md rounded-lg backdrop-blur-lg"
+      className="p-10 bg-gray-800 text-white shadow-md backdrop-blur-lg"
     >
-      <h2 className="text-4xl font-extrabold mb-6 text-center">
+      <h2 className="text-3xl font-semibold mb-6 text-center">
         Reach Out to Us
       </h2>
       <Form layout="vertical">
-        <Form.Item label="Full Name" name="name">
+        <Form.Item name="name">
           <Input
             placeholder="Enter Your Full Name"
             className="rounded-md shadow-inner"
@@ -41,9 +41,8 @@ const ContactForm: React.FC = () => {
           />
         </Form.Item>
         <Button
-          type="primary"
           htmlType="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 transition duration-300"
+          className="w-1/2 flex justify-center bg-white-600 hover:bg-blue-700 transition duration-300"
         >
           Submit Your Message
         </Button>
